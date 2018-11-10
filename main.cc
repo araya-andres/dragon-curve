@@ -1,41 +1,39 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
-
 #include "turtle.h"
 
-int main() {
-    auto canvas_size = sf::Vector2f{800, 600};
-    turtle t{canvas_size * .5f};
-    // draw a triangle
-    t.left(30);
-    t.forward(300);
-    t.left(120);
-    t.forward(300);
-    t.left(120);
-    t.forward(300);
+const sf::Vector2f canvas_size{1024.f, 768.f};
+const sf::Vector2f canvas_center = canvas_size * .5f;
 
-    t.penup();
-    t.forward(20);
-    t.pendown();
-
-    // draw a square
-    t.left(90);
-    t.forward(200);
-    t.right(90);
-    t.forward(200);
-    t.right(90);
-    t.forward(200);
-    t.right(90);
-    t.forward(200);
-
-    sf::RenderWindow window{sf::VideoMode(canvas_size.x, canvas_size.y), "Turtle"};
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) window.close();
+class dragon {
+public:
+    dragon(sf::Vector2f const& pos, unsigned const n): t{pos} { X(n); }
+    void draw(sf::RenderWindow& canvas) const { t.draw(canvas); }
+private:
+    void X(unsigned const n) { if (n > 0) L("X+YF+", n); }
+    void Y(unsigned const n) { if (n > 0) L("-FX-Y", n); }
+    void L(std::string const& s, unsigned const n) {
+        for (auto const ch: s) {
+            if      (ch == '-') t.left(90);
+            else if (ch == '+') t.right(90);
+            else if (ch == 'X') X(n - 1);
+            else if (ch == 'Y') Y(n - 1);
+            else if (ch == 'F') t.forward(side);
         }
-        window.clear();
-        t.draw(window);
-        window.display();
+    }
+    turtle t;
+    unsigned side = 12;
+};
+
+int main() {
+    dragon d{canvas_center, 10};
+    sf::RenderWindow w{sf::VideoMode(canvas_size.x, canvas_size.y), "Dragon"};
+    while (w.isOpen()) {
+        sf::Event e;
+        while (w.pollEvent(e)) {
+            if (e.type == sf::Event::Closed) w.close();
+        }
+        w.clear();
+        d.draw(w);
+        w.display();
     }
 }

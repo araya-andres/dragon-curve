@@ -1,7 +1,9 @@
 #include "turtle.h"
 #include <cmath>
 
-turtle::turtle(const sf::Vector2f& position): position_(position) {
+turtle::turtle(sf::Vector2f const& position)
+    : initial_pos_{position}
+    , position_(initial_pos_) {
 }
 
 void turtle::forward(unsigned distance) {
@@ -21,6 +23,15 @@ void turtle::backward(unsigned distance) {
     left(180);
 }
 
+void turtle::go_to(sf::Vector2f const& new_position) {
+    position_ = new_position;
+}
+
+void turtle::home() {
+    position_ = initial_pos_;
+    alpha_ = 90;
+}
+
 void turtle::right(unsigned angle) {
     angle %= 360;
     left(360 - angle);
@@ -38,6 +49,10 @@ void turtle::penup() {
     pendown_ = false;
 }
 
-void turtle::draw(sf::RenderWindow& canvas) {
+void turtle::draw(sf::RenderWindow& canvas) const {
     canvas.draw(lines_.data(), lines_.size(), sf::Lines);
+}
+
+sf::Vector2f turtle::position() const {
+    return position_;
 }

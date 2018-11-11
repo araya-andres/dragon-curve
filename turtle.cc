@@ -8,7 +8,7 @@ turtle::turtle(sf::Vector2f const& position, unsigned heading)
     , heading_{heading0_} {
 }
 
-void turtle::forward(unsigned distance) {
+void turtle::forward(unsigned const distance) {
     auto alpha = M_PI * heading_ / 180; // in radians
     auto delta = sf::Vector2f{cosf(alpha), -sinf(alpha)} * (float)distance;
     auto new_position = position_ + delta;
@@ -19,7 +19,7 @@ void turtle::forward(unsigned distance) {
     position_ = new_position;
 }
 
-void turtle::backward(unsigned distance) {
+void turtle::backward(unsigned const distance) {
     left(180);
     forward(distance);
     left(180);
@@ -34,12 +34,11 @@ void turtle::home() {
     heading_ = heading0_;
 }
 
-void turtle::right(unsigned angle) {
-    angle %= 360;
-    left(360 - angle);
+void turtle::right(unsigned const angle) {
+    left(360 - angle % 360);
 }
 
-void turtle::left(unsigned angle) {
+void turtle::left(unsigned const angle) {
     heading_ = (heading_ + angle) % 360;
 }
 

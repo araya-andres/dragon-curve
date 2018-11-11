@@ -10,12 +10,12 @@ public:
     enum { EAST = 0, NORTH = 90, WEST = 180, SOUTH = 270 };
 
     turtle(sf::Vector2f const& position, unsigned heading = NORTH);
-    void forward(unsigned distance);
-    void backward(unsigned distance);
+    void forward(unsigned const distance);
+    void backward(unsigned const distance);
     void go_to(sf::Vector2f const& new_position);
     void home();
-    void right(unsigned angle);
-    void left(unsigned angle);
+    void right(unsigned const angle);
+    void left(unsigned const angle);
     void pendown();
     void penup();
     void draw(sf::RenderWindow& canvas) const;

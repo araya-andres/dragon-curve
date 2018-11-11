@@ -3,9 +3,9 @@
 
 turtle::turtle(sf::Vector2f const& position, unsigned heading)
     : position0_{position}
-    , position_(position0_)
-    , heading0_(heading)
-    , heading_(heading0_) {
+    , position_{position0_}
+    , heading0_{heading}
+    , heading_{heading0_} {
 }
 
 void turtle::forward(unsigned distance) {

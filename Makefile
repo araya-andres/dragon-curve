@@ -6,8 +6,5 @@ OBJS=$(patsubst %.cc, %.o, $(wildcard *.cc))
 $(TARGET): $(OBJS)
 	$(CXX) -o $@ $^ $(LDLIBS)
 
-%.o: %.c
-	$(CXX) $(CFLAGS) -c $<
-
 clean:
 	rm $(TARGET) $(OBJS)

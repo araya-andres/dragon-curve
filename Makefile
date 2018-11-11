@@ -1,4 +1,3 @@
-UNAME=$(shell uname)
 CXXFLAGS=-std=c++17 -Wall -pedantic
 LDLIBS+=-lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 TARGET=app

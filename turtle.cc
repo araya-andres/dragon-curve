@@ -1,13 +1,15 @@
 #include "turtle.h"
 #include <cmath>
 
-turtle::turtle(sf::Vector2f const& position)
-    : initial_pos_{position}
-    , position_(initial_pos_) {
+turtle::turtle(sf::Vector2f const& position, unsigned heading)
+    : position0_{position}
+    , position_(position0_)
+    , heading0_(heading)
+    , heading_(heading0_) {
 }
 
 void turtle::forward(unsigned distance) {
-    auto alpha = M_PI * alpha_ / 180; // in radians
+    auto alpha = M_PI * heading_ / 180; // in radians
     auto delta = sf::Vector2f{cosf(alpha), -sinf(alpha)} * (float)distance;
     auto new_position = position_ + delta;
     if (pendown_) {
@@ -28,8 +30,8 @@ void turtle::go_to(sf::Vector2f const& new_position) {
 }
 
 void turtle::home() {
-    position_ = initial_pos_;
-    alpha_ = 90;
+    position_ = position0_;
+    heading_ = heading0_;
 }
 
 void turtle::right(unsigned angle) {
@@ -38,7 +40,7 @@ void turtle::right(unsigned angle) {
 }
 
 void turtle::left(unsigned angle) {
-    alpha_ = (alpha_ + angle) % 360;
+    heading_ = (heading_ + angle) % 360;
 }
 
 void turtle::pendown() {

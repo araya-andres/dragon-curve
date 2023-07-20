@@ -1,5 +1,4 @@
-#ifndef TURTLE_H
-#define TURTLE_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -28,5 +27,3 @@ private:
     bool pendown_ = true;
     std::vector<sf::Vertex> lines_;
 };
-
-#endif

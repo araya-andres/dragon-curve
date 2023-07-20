@@ -1,6 +1,6 @@
 # Dragon curve
 
-Draw a dragon curve using a "turtle".
+Draw a dragon curve using a "turtle". This is a minimal SFML project, with Conan handling the dependencies.
 
 ## Requirements
 

@@ -2,12 +2,8 @@
 sfml/2.5.1
 
 [options]
-sfml/*:network=False
 sfml/*:shared=True
 
 [generators]
 CMakeDeps
 CMakeToolchain
-
-[imports]
-lib, *.dylib* -> ./bin
